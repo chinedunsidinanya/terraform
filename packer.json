@@ -1,0 +1,31 @@
+{     
+    "builders": [{
+      "type": "amazon-ebs",
+      "access_key": "{{user `AWS_ACCESS_KEY_ID`}}",
+      "secret_key": "{{user `AWS_SECRET_ACCESS_KEY`}}",
+      "region": "us-east-1",
+      "vpc_filter": {
+        "filters": {
+          "tag:Name": "gcs-lab-vpc"
+        }
+      },
+      "subnet_filter": {
+        "filters": {
+          "tag:Name": "gcs-public-subnet"
+        },
+        "most_free": true,
+        "random": false
+      }
+    ,
+      "source_ami": "ami-0915bcb5fa77e4892",
+      "instance_type": "t2.micro",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+      "ssh_username": "ec2-user",
+      "ami_name": "{{user `ami_name`}}"
+    }],
+    "provisioners": [{
+      "type": "shell",
+      "scripts": [  "scripts/shellscript.sh"   ],
+      "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",                                                                        
+      "pause_before": "10s"
+    }]
+  }

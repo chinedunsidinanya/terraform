@@ -1,0 +1,13 @@
+# Ignore Mac system files
+.DS_store
+
+# Ignore node_modules folder
+variables.json
+
+# Ignore all text files
+TerraformKey
+TerraformKey.pub
+
+# Ignore files related to API keys
+
+
